@@ -14,12 +14,18 @@ HTMLWidgets.widget({
 
         // TODO: code to render the widget, e.g.
         var annots = HTMLWidgets.dataframeToD3(x.data);
+        var rows = HTMLWidgets.dataframeToD3(x.samples)
+        var legend = [{
+          name: "Shared IBD regions",
+          rows: rows
+        }];
         var ideogram = new Ideogram({
           organism: 'human',
           annotations: annots,
           chrHeight: 500,
           chrMargin: 2,
-          annotationsLayout: 'overlay'
+          annotationsLayout: 'overlay',
+          legend: legend
         });
       },
 
