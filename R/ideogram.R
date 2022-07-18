@@ -5,10 +5,15 @@
 #' @import htmlwidgets
 #'
 #' @export
-ideogram <- function(df, width = NULL, height = NULL, elementId = NULL) {
+ideogram <- function(df, width = NULL, height = NULL,
+                     elementId = NULL) {
   # forward options using x
   x = list(
-    data = df
+    data = df[,-1],
+    samples = data.frame(name=levels(factor(df$name)),
+                         color=levels(factor(df$color)),
+                         shape=rep("rectangle",
+                                   length(unique(df$name))))
   )
 
 
