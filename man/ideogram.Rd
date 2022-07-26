@@ -4,7 +4,10 @@
 \alias{ideogram}
 \title{R binding for ideogram}
 \usage{
-ideogram(df, width = NULL, height = NULL, elementId = NULL)
+ideogram(file, width = NULL, height = NULL, elementId = NULL)
+}
+\arguments{
+\item{file}{IBIS IBD segments file}
 }
 \description{
 Plots ideogram.
