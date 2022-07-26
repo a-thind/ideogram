@@ -3,4 +3,6 @@
 export(ideogram)
 export(ideogramOutput)
 export(renderIdeogram)
+import(DescTools)
 import(htmlwidgets)
+import(scales)

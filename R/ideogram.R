@@ -3,17 +3,38 @@
 #' Plots ideogram.
 #'
 #' @import htmlwidgets
-#'
+#' @import scales
+#' @import DescTools
+#' @param file IBIS IBD segments file
 #' @export
-ideogram <- function(df, width = NULL, height = NULL,
+ideogram <- function(file, width = NULL, height = NULL,
                      elementId = NULL) {
+  ibd <- read.table(file, header=TRUE)
+
+  # concatenate two sample names together
+  ibd$name <- paste0(ibd$sample1, '-', ibd$sample2)
+  # remove first two sample columns
+  ibd <- ibd[, -c(1,2)]
+
+  ibd$name <- as.factor(ibd$name)
+  # create colours
+  color <- scales::hue_pal()(length(levels(ibd$name)))
+  # add alpha
+  color <- DescTools::SetAlpha(color, alpha=0.65)
+  # map the colours to the samples
+  ibd$color <- factor(ibd$name, labels=color)
+
+  annots <- ibd[,c("name", "chrom", "phys_start_pos", "phys_end_pos", "color")]
+  colnames(annots)[2:4] <- c("chr","start", "stop")
+  annots$chr <- as.character(annots$chr)
+
   # forward options using x
   x = list(
-    data = df[,-1],
-    samples = data.frame(name=levels(factor(df$name)),
-                         color=levels(factor(df$color)),
+    data = annots[,-1],
+    samples = data.frame(name=levels(annots$name),
+                         color=levels(factor(annots$color)),
                          shape=rep("rectangle",
-                                   length(unique(df$name))))
+                                   length(levels(annots$name))))
   )
 
 
@@ -25,11 +46,7 @@ ideogram <- function(df, width = NULL, height = NULL,
     width = width,
     height = height,
     package = 'ideogram',
-    elementId = elementId,
-    sizingPolicy = htmlwidgets::sizingPolicy(
-      viewer.padding = 0,
-      browser.fill = TRUE
-      )
+    elementId = elementId
   )
 }
 
@@ -51,7 +68,8 @@ ideogram <- function(df, width = NULL, height = NULL,
 #'
 #' @export
 ideogramOutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'ideogram', width, height, package = 'ideogram')
+  htmlwidgets::shinyWidgetOutput(outputId, 'ideogram', width, height,
+                                 package = 'ideogram')
 }
 
 #' @rdname ideogram-shiny
