@@ -46,7 +46,10 @@ ideogram <- function(file, width = NULL, height = NULL,
     width = width,
     height = height,
     package = 'ideogram',
-    elementId = elementId
+    elementId = elementId,
+    sizingPolicy = htmlwidgets::sizingPolicy(
+      browser.padding = 100
+    )
   )
 }
 
