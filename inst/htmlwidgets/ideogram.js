@@ -32,12 +32,23 @@ HTMLWidgets.widget({
         };
 
         ideogram = new Ideogram(config);
-        ideogram: ideogram;
+        el.ideogram = ideogram;
+      },
+
+      getIdeogram: function(){
+        return ideogram;
+      },
+
+      getIdeoObj: function(id) {
+        // get HTMLwidget
+        var htmlWidgObj = HTMLWidgets.find("#" + id);
+        // access the ideogram object from the HTMLwidget
+        var igram = htmlWidgObj.getIdeogram();
+        return igram;
       },
 
       resize: function(width, height) {
       }
-
     };
   }
 });

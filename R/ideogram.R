@@ -81,3 +81,6 @@ renderIdeogram <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   htmlwidgets::shinyRenderWidget(expr, ideogramOutput, env, quoted = TRUE)
 }
+
+
+
