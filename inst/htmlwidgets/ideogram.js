@@ -22,18 +22,22 @@ HTMLWidgets.widget({
           rows: rows
         }];
 
-        var ideogram = new Ideogram({
+        var config= {
           organism: 'human',
           annotations: annots,
           annotationsLayout: 'overlay',
           legend: legend,
-          container: container
-        });
+          container: container,
+          filterable: true
+        };
 
+        ideogram = new Ideogram(config);
+        ideogram: ideogram;
       },
 
       resize: function(width, height) {
       }
+
     };
   }
 });
