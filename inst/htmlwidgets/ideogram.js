@@ -28,7 +28,8 @@ HTMLWidgets.widget({
           annotationsLayout: 'overlay',
           legend: legend,
           container: container,
-          filterable: true
+          filterable: true,
+          rotatable: false
         };
 
         ideogram = new Ideogram(config);
