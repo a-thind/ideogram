@@ -29,7 +29,15 @@ HTMLWidgets.widget({
           legend: legend,
           container: container,
           filterable: true,
-          rotatable: false
+          rotatable: false,
+          onDrawAnnots: function() {
+          var polygons = document.getElementsByClassName("annot");
+          for (var i = 0; i < polygons.length; i++) {
+            polygons[i].onclick = function(event){
+              Shiny.onInputChange("chosenRegion", this.__data__);
+            }
+          }
+          }
         };
 
         ideogram = new Ideogram(config);
