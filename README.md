@@ -5,13 +5,13 @@ A HTML widget in R for rendering an overlaid diagram using [Ideogram.js](https:/
 - R
 
 # Installation
-To install the ideogram widget, download the [zip file](https://github.com/a-thind/ideogram/archive/refs/heads/main.zip) and run the following command in R:
+To install the ideogram R library, download the [zip file](https://github.com/a-thind/ideogram/archive/refs/heads/main.zip) and run the following command in R:
 ```
-install.packages("ideogram-main.zip, type="source", repos=NULL)
+install.packages("ideogram-main.zip", type="source", repos=NULL)
 ```
 
 # Usage
-After installation, create the htmlwidget in R by typing:
+After installation of the ideogram library in R, create the htmlwidget in R by calling the ```ideogram``` function with an IBIS IBD segment file:
 ```
 ideogram("ibd_segment.txt")
 ```
