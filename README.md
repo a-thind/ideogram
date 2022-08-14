@@ -10,7 +10,13 @@ To install the ideogram R library, download the [zip file](https://github.com/a-
 install.packages("ideogram-main.zip", type="source", repos=NULL)
 ```
 
+
 # Usage
+To start using the ideogram library, type the following in R:
+```
+library(ideogram)
+```
+
 After installation of the ideogram library in R, create the htmlwidget in R by calling the ```ideogram``` function with an IBIS IBD segment file:
 ```
 ideogram("ibd_segment.txt")
