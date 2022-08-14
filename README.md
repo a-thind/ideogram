@@ -11,7 +11,7 @@ install.packages("ideogram-main.zip, type="source", repos=NULL)
 ```
 
 # Usage
-After installationTo create the htmlwidget in R type:
+After installation, create the htmlwidget in R by typing:
 ```
 ideogram("ibd_segment.txt")
 ```
