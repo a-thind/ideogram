@@ -2,7 +2,13 @@
 A HTML widget in R for rendering an overlaid diagram using [Ideogram.js](https://eweitz.github.io/ideogram/) ([https://github.com/eweitz/ideogram](https://github.com/eweitz/ideogram)).
 
 # System Requirements
-- R
+- R (>4.2.1)
+
+To install all the widget's dependencies, type the following in R:
+```
+install.packages(c("htmlwidgets", "pals", "DescTools"))
+```
+
 
 # Installation
 To install the ideogram R library, download the [zip file](https://github.com/a-thind/ideogram/archive/refs/heads/main.zip) and run the following command in R:
