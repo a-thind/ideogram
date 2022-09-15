@@ -3,29 +3,40 @@
 #' Plots ideogram.
 #'
 #' @import htmlwidgets
-#' @import scales
+#' @import pals
 #' @import DescTools
 #' @param file IBIS IBD segments file
 #' @export
 ideogram <- function(file, width = NULL, height = NULL,
                      elementId = NULL) {
-  ibd <- read.table(file, header=TRUE)
+  if (!file.exists(file)){
+    stop(sprintf('File path "%s" does not exist.', file))
+  }
+  # check header line
+  if (!suppressWarnings(
+    # if the header line contains all characters
+    all(is.na(as.numeric(
+      read.table("~/Downloads/test-no-header.txt", nrows=1)))))){
+    ibd <- read.table(file, header=TRUE)
+  } else {
+    ibd <- read.table(file)
+  }
+
 
   # concatenate two sample names together
-  ibd$name <- paste0(ibd$sample1, '-', ibd$sample2)
+  ibd$name <- paste0(ibd[,1], '-', ibd[,2])
   # remove first two sample columns
   ibd <- ibd[, -c(1,2)]
 
   ibd$name <- as.factor(ibd$name)
   # create colours
-  color <- scales::hue_pal()(length(levels(ibd$name)))
+  color <- pals::glasbey()[1:length(levels(ibd$name))]
   # add alpha
   color <- DescTools::SetAlpha(color, alpha=0.65)
   # map the colours to the samples
   ibd$color <- factor(ibd$name, labels=color)
-
-  annots <- ibd[,c("name", "chrom", "phys_start_pos", "phys_end_pos", "color")]
-  colnames(annots)[2:4] <- c("chr","start", "stop")
+  annots <- ibd[,c(11, 1, 2, 3, 12)]
+  colnames(annots)[1:4] <- c("name", "chr","start", "stop")
   annots$chr <- as.character(annots$chr)
 
   # forward options using x
