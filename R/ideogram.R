@@ -1,9 +1,9 @@
 
 #' Reads input IBD segment file
 #'
-#' @param file
+#' @param file input file
 #'
-#' @return
+#' @return A data frame containing IBD segment data from the input file
 #' @export
 #'
 #' @examples
