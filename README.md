@@ -1,5 +1,5 @@
 # Ideogram
-A HTML widget in R for rendering an overlaid diagram using [Ideogram.js](https://eweitz.github.io/ideogram/) ([https://github.com/eweitz/ideogram](https://github.com/eweitz/ideogram)).
+A lightweight interactive HTML widget in R for rendering an annotation-overlaid ideogram diagram using [Ideogram.js](https://eweitz.github.io/ideogram/) ([https://github.com/eweitz/ideogram](https://github.com/eweitz/ideogram)). The annotation bands on the chromosomes of the ideogram register click events allowing integration of the interactive ideogram in Shiny applications.
 
 # System Requirements
 - R (>4.2.1)
@@ -18,7 +18,7 @@ install.packages("ideogram-main.zip", type="source", repos=NULL)
 
 
 # Usage
-To start using the ideogram library, type the following in R:
+To start using the ideogram library in the R environment, type the following in R:
 ```
 library(ideogram)
 ```
