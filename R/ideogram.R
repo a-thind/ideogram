@@ -1,3 +1,32 @@
+
+#' Reads input IBD segment file
+#'
+#' @param file
+#'
+#' @return
+#' @export
+#'
+#' @examples
+readFile <- function(file){
+  if (!file.exists(file)){
+    stop(sprintf('File path "%s" does not exist.', file))
+  }
+  ext <- tools::file_ext(file)
+  if (ext!="seg"){
+    stop(sprintf('File "%s" is not an IBIS (IBD) segment file.', file))
+  }
+
+  # check header line
+  if (!suppressWarnings(
+    # if the header line contains all characters
+    all(is.na(as.numeric(
+      read.table(file, nrows=1)))))){
+    ibd <- read.table(file)
+  } else {
+    ibd <- read.table(file, header=TRUE)
+  }
+  return(ibd)
+}
 #' R binding for ideogram
 #'
 #' Plots ideogram.
@@ -9,20 +38,7 @@
 #' @export
 ideogram <- function(file, width = NULL, height = NULL,
                      elementId = NULL) {
-  if (!file.exists(file)){
-    stop(sprintf('File path "%s" does not exist.', file))
-  }
-  # check header line
-  if (!suppressWarnings(
-    # if the header line contains all characters
-    all(is.na(as.numeric(
-      read.table("~/Downloads/test-no-header.txt", nrows=1)))))){
-    ibd <- read.table(file, header=TRUE)
-  } else {
-    ibd <- read.table(file)
-  }
-
-
+  ibd <- readFile(file)
   # concatenate two sample names together
   ibd$name <- paste0(ibd[,1], '-', ibd[,2])
   # remove first two sample columns
