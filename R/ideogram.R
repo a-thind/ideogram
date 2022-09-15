@@ -9,6 +9,9 @@
 #' @export
 ideogram <- function(file, width = NULL, height = NULL,
                      elementId = NULL) {
+  if (!file.exists(file)){
+    stop(sprintf('File path "%s" does not exist.', file))
+  }
   ibd <- read.table(file, header=TRUE)
 
   # concatenate two sample names together
