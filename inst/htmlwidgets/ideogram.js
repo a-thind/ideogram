@@ -39,6 +39,9 @@ HTMLWidgets.widget({
           }
           }
         };
+        if (ideogram != null){
+          ideogram.config.clear();
+        }
 
         ideogram = new Ideogram(config);
         el.ideogram = ideogram;

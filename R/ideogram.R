@@ -1,3 +1,30 @@
+
+#' Reads input IBD segment file
+#'
+#' @param file input file
+#'
+#' @return A data frame containing IBD segment data from the input file
+#' @export
+#'
+#' @examples
+readFile <- function(file){
+  if (!file.exists(file)){
+    stop(sprintf('File path "%s" does not exist.', file))
+  }
+  # check file extension
+  ext <- tools::file_ext(file)
+
+  # check header line
+  if (!suppressWarnings(
+    # if the header line contains all characters
+    all(is.na(as.numeric(
+      read.table(file, nrows=1, sep="\t")))))){
+    ibd <- read.table(file, sep="\t")
+  } else {
+      ibd <- read.table(file, header=TRUE, check.names=TRUE, sep="\t")
+  }
+  return(ibd)
+}
 #' R binding for ideogram
 #'
 #' Plots ideogram.
@@ -9,33 +36,43 @@
 #' @export
 ideogram <- function(file, width = NULL, height = NULL,
                      elementId = NULL) {
-  if (!file.exists(file)){
-    stop(sprintf('File path "%s" does not exist.', file))
-  }
-  # check header line
-  if (!suppressWarnings(
-    # if the header line contains all characters
-    all(is.na(as.numeric(
-      read.table("~/Downloads/test-no-header.txt", nrows=1)))))){
-    ibd <- read.table(file, header=TRUE)
+  ibd <- readFile(file)
+  # check file extension
+  ext <- tools::file_ext(file)
+  # for IBIS segment file (.seg)
+  if (ext=="seg"){
+    # concatenate two sample names together
+    ibd$name <- paste0(ibd[,1], '-', ibd[,2])
+    # remove first two sample columns
+    ibd <- ibd[, -c(1,2)]
+
+    ibd$name <- as.factor(ibd$name)
+    # create colours
+    color <- pals::glasbey()[1:length(levels(ibd$name))]
+    # add alpha
+    color <- DescTools::SetAlpha(color, alpha=0.65)
+    # map the colours to the samples
+    ibd$color <- factor(ibd$name, labels=color)
+    annots <- ibd[,c(11, 1, 2, 3, 12)]
+    # if the file is a TRUFFLE IBD segment file
+  } else if (ext=="segments"){
+    # concatenate two sample names together
+    ibd$name <- paste0(ibd[,2], '-', ibd[,3])
+    # remove the two sample columns
+    ibd <- ibd[, -c(2,3)]
+
+    ibd$name <- as.factor(ibd$name)
+    # create colours
+    color <- pals::glasbey()[1:length(levels(ibd$name))]
+    # add alpha
+    color <- DescTools::SetAlpha(color, alpha=0.65)
+    # map the colours to the samples
+    ibd$color <- factor(ibd$name, labels=color)
+    annots <- ibd[,c(8, 2, 3, 4, 9)]
   } else {
-    ibd <- read.table(file)
+    stop("Input file is not an IBD segment file (.seg/.segments)")
   }
 
-
-  # concatenate two sample names together
-  ibd$name <- paste0(ibd[,1], '-', ibd[,2])
-  # remove first two sample columns
-  ibd <- ibd[, -c(1,2)]
-
-  ibd$name <- as.factor(ibd$name)
-  # create colours
-  color <- pals::glasbey()[1:length(levels(ibd$name))]
-  # add alpha
-  color <- DescTools::SetAlpha(color, alpha=0.65)
-  # map the colours to the samples
-  ibd$color <- factor(ibd$name, labels=color)
-  annots <- ibd[,c(11, 1, 2, 3, 12)]
   colnames(annots)[1:4] <- c("name", "chr","start", "stop")
   annots$chr <- as.character(annots$chr)
 
