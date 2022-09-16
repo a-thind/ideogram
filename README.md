@@ -16,10 +16,11 @@ install.packages(c("htmlwidgets", "pals", "DescTools"))
 ```
 
 
-## Installation
-To install the ideogram R library, download the [zip file](https://github.com/a-thind/ideogram/archive/refs/heads/main.zip) and run the following command in R:
+## Download and Installation
+To download the latest release of the Ideogram htmlwidget library click here.
+To install the ideogram R library, download the [tar file (.tar.gz)](https://github.com/a-thind/ideogram/archive/refs/tags/v0.1.0-alpha.tar.gz) and run the following command in R using the downloaded ideogram tar file path:
 ```
-install.packages("ideogram-main.zip", type="source", repos=NULL)
+install.packages("ideogram-0.1.0-alpha.tar.gz", type="source", repos=NULL)
 ```
 ## IBD Segment File
 The input IBD segment file containing IBD segment to be displayed on the ideogram widget can be either an IBIS IBD segment file (.seg) or a TRUFFLE segments file (.segment).
