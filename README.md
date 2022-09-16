@@ -71,3 +71,5 @@ serve <- function(input, output){
 }
 shinyApp(ui, output)
 ```
+# Questions, Feature Requests, Bug Reports and Issues
+For any questions, feature requests, bug reports or issues regarding the latest version of Ideogram, please click on the "[issues](https://github.com/a-thind/ideogram/issues)" tab present at the top-left of the GitHub repository page.
