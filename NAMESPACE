@@ -2,6 +2,7 @@
 
 export(ideogram)
 export(ideogramOutput)
+export(readFile)
 export(renderIdeogram)
 import(DescTools)
 import(htmlwidgets)

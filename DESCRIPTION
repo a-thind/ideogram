@@ -1,12 +1,13 @@
 Package: ideogram
-Title: Draws ideograms using ideogram.js
+Title: An interactive ideogram widget displaying chromosome segment annotation 
+  using ideogram.js
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Anisha", "Thind", , "a.thind@cranfield.ac.uk", role = c("aut", "cre"))
+Description: Ideogram is a wrapper html widget for the IdeogramJS API that 
+  renders an interactive ideogram displaying shared IBD segments parsed from an 
+  input IBD segment file.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
