@@ -21,6 +21,19 @@ To install the ideogram R library, download the [zip file](https://github.com/a-
 ```
 install.packages("ideogram-main.zip", type="source", repos=NULL)
 ```
+## IBD Segment File
+The input IBD segment file containing IBD segment to be displayed on the ideogram widget can be either an IBIS IBD segment file (.seg) or a TRUFFLE segments file (.segment).
+
+An example <b>IBIS segment</b> file (default file is usually headerless)<br/><br/>
+![Screenshot from 2022-09-16 14-33-30](https://user-images.githubusercontent.com/26285885/190651099-ba52fb6e-e7cb-4f34-afcc-2cd2fe89d7a3.png)
+<br/><br/>
+
+If a header is provided, the header must be specified as follows:<br/><br/>
+![Screenshot from 2022-09-16 14-35-17](https://user-images.githubusercontent.com/26285885/190651492-ce765220-017f-49f2-8904-ce0aca71d07f.png)
+<br/><br/>
+
+An example <b>Truffle segments</b> file (taken from an example provided on the TRUFFLE website at https://adimitromanolakis.github.io/truffle-website/documentation/doc.html)
+![image](https://user-images.githubusercontent.com/26285885/190647191-29a3bebd-dfb8-4341-867b-00e9ac211dbe.png)
 
 
 ## Usage
